@@ -63,7 +63,7 @@ output = []
 # pick a random seed of length level (or k)
 seed = get_seed(book, k)
 # repeat as long as there isn't enough output yet
-while len(output) < length:
+while len(output) < length: ##line 66-67 ChatGDP
     nxt_char = get_next_char(book, seed)
 
     # if one exists
