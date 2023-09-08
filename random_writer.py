@@ -1,7 +1,7 @@
 ######################################
 # Random Writer programming assignment
-# Charlize Johansson
-# 2022-09-09
+# Liz Denson &
+# 2022-09-11
 ######################################
 
 # import libraries
@@ -11,17 +11,17 @@ from random import randint, choice
 # FUNCTIONS
 ###########
 # returns a random seed of length level (or k) from the book
-def get_seed():
+def get_seed(book, k):
     # pick a random index that represents the beginning of the seed in the book
-
+    index = randint(0, len(book - k - 1)
     # return the random seed of length level (or k)
-
+    return book[index:index + k]
 # returns a random next character given a seed from the book
-def get_next_char():
+def get_next_char(book, seed):
     # initialize the list of characters
-
+    next_chars = []
     # initialize the current index (where we begin to look in the book)
-
+    index = 0
     # continually find the seed in the book
         # find the index of the seed in the book beginning at the current index
 
