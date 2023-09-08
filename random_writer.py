@@ -47,38 +47,37 @@ def get_next_char(book, seed):
 ######
 
 # grab command line arguments (or manually set the parameters)
-def main():
-    # k (or level) -> the level of analysis performed on the book
-    k = 1
-    # length -> the length of output to generate
-    length = 150
-    # filename -> the filename that contains the text of the book
-    filename = "hg-wells_the-time-machine.txt"
+# k (or level) -> the level of analysis performed on the book
+k = 1
+# length -> the length of output to generate
+length = 150
+# filename -> the filename that contains the text of the book
+filename = "hg-wells_the-time-machine.txt"
     
-    # grab the book
-    with open(filename, "r") as f:
-        book = f.read()
+# grab the book
+with open(filename, "r") as f:
+    book = f.read()
         
-    # initialize the output
-    output = []
+# initialize the output
+output = []
     
-    # pick a random seed of length level (or k)
-    seed = get_seed(book, k)
+# pick a random seed of length level (or k)
+seed = get_seed(book, k)
     
-    # repeat as long as there isn't enough output yet
-    while len(output) < length: ##line 66-67 ChatGDP
-        nxt_char = get_next_char(book, seed)
+# repeat as long as there isn't enough output yet
+while len(output) < length: ##line 66-67 ChatGDP
+    nxt_char = get_next_char(book, seed)
         
-        # if one exists
-        if nxt_char is not None:
-            # add it to the output
-            output.append(nxt_char)
-            seed = seed[1:] + nxt_char
-        # otherwise
-        else:
-            # pick another random seed
-            seed = get_seed(book, k)
+    # if one exists
+    if nxt_char is not None:
+        # add it to the output
+        output.append(nxt_char)
+        seed = seed[1:] + nxt_char
+    # otherwise
+    else:
+        # pick another random seed
+        seed = get_seed(book, k)
             
-    # display the output
-    
+# display the output
+print(''.join(output))
 
