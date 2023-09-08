@@ -71,7 +71,7 @@ while len(output) < length:
         # add it to the output
         output.append(nxt_char)
        
-        seed = seed[1:] + next_char
+        seed = seed[1:] + nxt_char
     else:
         # Pick another random seed
         seed = get_seed(book, k)
