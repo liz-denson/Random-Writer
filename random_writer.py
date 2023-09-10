@@ -5,6 +5,7 @@
 ######################################
 
 # import libraries
+import sys
 from random import randint, choice
 
 ###########
@@ -46,13 +47,19 @@ def get_next_char(book, seed):
 # MAIN
 ######
 
-# grab command line arguments (or manually set the parameters)
+# manually set the parameters
 # k (or level) -> the level of analysis performed on the book
 k = 1
 # length -> the length of output to generate
 length = 150
 # filename -> the filename that contains the text of the book
 filename = "hg-wells_the-time-machine.txt"
+
+# if arguments are provided, overwrite parameter values
+if len(sys.argv) > 1: ## line 59 - 62 ChatGPT
+    k = int(sys.argv[1])
+    length = int(sys.argv[2])
+    filename = sys.argv[3]
     
 # grab the book
 with open(filename, "r") as f:
@@ -65,7 +72,7 @@ output = []
 seed = get_seed(book, k)
     
 # repeat as long as there isn't enough output yet
-while len(output) < length: ##line 66-67 ChatGDP
+while len(output) < length: ## line 72-73 ChatGPT
     nxt_char = get_next_char(book, seed)
         
     # if one exists
