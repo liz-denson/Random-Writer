@@ -72,6 +72,7 @@ while len(output) < length: ##line 66-67 ChatGDP
     if nxt_char is not None:
         # add it to the output
         output.append(nxt_char)
+        # and recalculate the seed
         seed = seed[1:] + nxt_char
     # otherwise
     else:
