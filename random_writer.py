@@ -62,7 +62,7 @@ if len(sys.argv) > 1: ## line 59 - 62 ChatGPT
     filename = sys.argv[3]
     
 # grab the book
-with open(filename, "r") as f:
+with open(filename, "r") as f: #lines 65-66 based on pasted assignment
     book = f.read()
         
 # initialize the output
