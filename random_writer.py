@@ -5,7 +5,6 @@
 ######################################
 
 # import libraries
-import sys
 from random import randint, choice
 
 ###########
@@ -15,30 +14,30 @@ from random import randint, choice
 # returns a random seed of length level (or k) from the book
 def get_seed(book, k):
     # pick a random index that represents the beginning of the seed in the book
-    index = randint(0, len(book) - k - 1)
+    index = randint(0, len(book) - k)
     # return the random seed of length level (or k)
     return book[index:index + k]
     
 # returns a random next character given a seed from the book
-def get_next_char(book, seed):
+def get_nxt_char(book, seed, k):
     # initialize the list of characters
-    nxt_chars = []
+    chars = []
     # initialize the current index (where we begin to look in the book)
     index = 0
     # continually find the seed in the book
-    while True:
+    while (index < len(book) - k):
         # find the index of the seed in the book beginning at the current index
         index = book.find(seed, index)
         # abort if the seed is not found (or it's at the end of the book)
-        if index == -1 or index + len(seed) == len(book):
+        if (index == -1 or index + k >= len(book)):
             break
         # otherwise, add the next character to the list
-        nxt_chars.append(book[index + len(seed)])
+        chars.append(book[index + k])
         # and update the index in the book
         index += 1
     # if there is at least one next character in the list of characters, return a randomly chosen one
-    if nxt_chars:
-        return choice(nxt_chars)
+    if (len(chars) > 0):
+        return choice(chars)
     # otherwise, return some appropriate trigger (e.g., None)
     else:
         return None
@@ -47,22 +46,16 @@ def get_next_char(book, seed):
 # MAIN
 ######
 
-# manually set the parameters
+# grab command line arguments (or manually set the parameters)
 # k (or level) -> the level of analysis performed on the book
-k = 1
 # length -> the length of output to generate
-length = 150
 # filename -> the filename that contains the text of the book
+k = 1
+length = 150
 filename = "hg-wells_the-time-machine.txt"
-
-# if arguments are provided, overwrite parameter values
-if len(sys.argv) > 1: ## line 59 - 62 ChatGPT
-    k = int(sys.argv[1])
-    length = int(sys.argv[2])
-    filename = sys.argv[3]
     
 # grab the book
-with open(filename, "r") as f: #lines 65-66 based on pasted assignment
+with open(filename, "r") as f: ## line 58-59 based on posted assignment
     book = f.read()
         
 # initialize the output
@@ -72,13 +65,14 @@ output = []
 seed = get_seed(book, k)
     
 # repeat as long as there isn't enough output yet
-while len(output) < length: ## line 72-73 ChatGPT
-    nxt_char = get_next_char(book, seed)
+while (len(output) < length): ## line 68-70 class example
+    # get a random next character
+    nxt_char = get_nxt_char(book, seed, k)
         
     # if one exists
-    if nxt_char is not None:
+    if (nxt_char != None):
         # add it to the output
-        output.append(nxt_char)
+        output += nxt_char
         # and recalculate the seed
         seed = seed[1:] + nxt_char
     # otherwise
@@ -88,4 +82,3 @@ while len(output) < length: ## line 72-73 ChatGPT
             
 # display the output
 print(''.join(output))
-
